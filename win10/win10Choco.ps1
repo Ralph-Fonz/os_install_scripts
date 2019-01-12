@@ -7,6 +7,7 @@
 # Normal Programs
 cinst -y chromium
 cinst -y firefox
+cinst -y GoogleChrome
 
 # Dev Tools
 cinst -y vscode
@@ -14,4 +15,3 @@ cinst -y hyper
 cinst -y notepadplusplus
 cinst -y slack
 cinst -y insomnia-rest-api-client
-
