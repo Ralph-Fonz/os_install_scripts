@@ -9,6 +9,10 @@ cinst -y chromium
 cinst -y firefox
 cinst -y GoogleChrome
 
+# Creative Programs
+cinst -y gimp
+cinst -y spotify
+
 # Dev Tools
 cinst -y vscode
 cinst -y hyper
