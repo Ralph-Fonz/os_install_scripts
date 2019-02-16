@@ -94,7 +94,7 @@ case "$var" in
  sudo ubuntu-drivers autoinstall
  echo 'Current NVIDIA ONLY Installed'
  ;;
- esac
+esac
 
 #################### Complete Statement #########################
 
