@@ -98,7 +98,23 @@ esac
 
 #################### Complete Statement #########################
 
-echo 'Installation complete, please restart your system'
+PS3='Installation complete, RESTART REQUIRED'
+options=("Restart" "Power-Off" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Restart")
+            sudo reboot
+            ;;
+        "Power-Off")
+            sudo poweroff
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
 
 ### things to remember 
 # ssh-keygen
