@@ -83,6 +83,19 @@ sudo apt install -y vim
 # Tilda #
 sudo apt install -y tilda
 
+###################### Nvidia / AMD Driver ######################
+
+var=$(lspci -nn | perl -lne 'print if /^\d+\:.+(\[\S+\:\S+\])/' | grep NVIDIA)
+
+case "$var" in
+ *NVIDIA*)
+ sudo add-apt-repository ppa:graphics-drivers/ppa \
+ sudo apt update
+ sudo ubuntu-drivers autoinstall
+ echo 'Current NVIDIA ONLY Installed'
+ ;;
+ esac
+
 #################### Complete Statement #########################
 
 echo 'Installation complete, please restart your system'
