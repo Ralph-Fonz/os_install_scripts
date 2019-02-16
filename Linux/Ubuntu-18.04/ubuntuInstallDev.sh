@@ -2,6 +2,21 @@
 
 # Install Script For Ubuntu 18.04
 
+######################## Pre-REQ #############################
+sudo apt update
+sudo apt upgrade -y
+
+# x-clip #
+sudo apt install -y xclip
+
+# snap #
+sudo apt install -y snap
+
+# wget#
+sudo apt install gdebi-core wget
+
+# Vim #
+sudo apt install -y vim
 
 ################# FOR CUSTOMIZING GNOME ######################
 
@@ -65,20 +80,11 @@ sudo apt install -y git
 # Notepad++ #
 snap install notepad-plus-plus
 
-# x-clip #
-sudo apt install -y xclip
-
-# snap #
-sudo apt install -y snap
-
 # notepadqq #
 sudo snap install notepadqq
 
 # Docker #
 sudo apt install -y docker
-
-# Vim #
-sudo apt install -y vim
 
 # Tilda #
 sudo apt install -y tilda
