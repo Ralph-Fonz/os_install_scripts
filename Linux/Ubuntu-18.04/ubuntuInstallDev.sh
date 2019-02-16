@@ -3,7 +3,7 @@
 # Install Script For Ubuntu 18.04
 
 
-#### Installing Basic stuff first ####
+################# FOR CUSTOMIZING GNOME ######################
 
 # Papirus Icon Theme #
 # https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
@@ -16,10 +16,31 @@ sudo apt-get install -y papirus-icon-theme
 sudo apt install -y arc-theme
 
 # Gnome Tweak tool #
-sudo apt install gnome-tweak-tool
+sudo apt install -y gnome-tweak-tool
 
 # Gnome Shell Extentions #
-sudo apt install gnome-shell-extensions
+sudo apt install -y gnome-shell-extensions
+
+################### VirtManager (KVM) ########################
+
+# Checks if yoru cpu can use hypervisor & returns only 1 'svm'
+isHyper=$(grep -o -m 1 'vmx\|svm' /proc/cpuinfo | head -1)
+
+if [ $isHyper = 'svm' ]; then
+  sudo apt install -y qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
+  # Add user to KVM Groups
+  sudo adduser $USER libvirt
+  sudo adduser $USER libvirt-quemu
+  echo '###########################'
+  echo 'Installation of virt-manager complete!'
+  echo '###########################'
+else
+  echo '###########################'
+  echo 'Cannot install virt-manager'
+  echo '###########################'
+fi
+
+#################### Typical Browers #########################
 
 # Chromium #
 sudo apt install -y chromium-browser
@@ -29,18 +50,8 @@ cd Downloads
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
-# Spotify #
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410
-sudo add-apt-repository "deb http://repository.spotify.com stable non-free"
-sudo apt install -y spotify-client
 
-##@# Install Dev Stuff ###@
-
-# Git #
-sudo apt install -y git
-
-# x-clip #
-sudo apt install -y xclip
+####################### Dev Tools ############################
 
 # VSCode #
 sudo apt install -y software-properties-common apt-transport-https wget
@@ -48,12 +59,34 @@ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt install -y code
 
+# Git #
+sudo apt install -y git
+
+# Notepad++ #
+snap install notepad-plus-plus
+
+# x-clip #
+sudo apt install -y xclip
+
+# snap #
+sudo apt install -y snap
+
+# notepadqq #
+sudo snap install notepadqq
+
 # Docker #
 sudo apt install -y docker
 
 # Vim #
 sudo apt install -y vim
 
-# my Key commands
+# Tilda #
+sudo apt install -y tilda
+
+#################### Complete Statement #########################
+
+echo 'Installation complete, please restart your system'
+
+### things to remember 
 # ssh-keygen
 # xclip -sel c < .ssh/id_rsa.pub 
