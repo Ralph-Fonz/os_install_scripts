@@ -1,6 +1,11 @@
 #!/bin/bash
 
 # Install Script For Ubuntu 18.04
+## Install List
+# xclip, wget, vim, g-tweak-tool, arc-theme, papirus, gnome-Extensions, virt-manager,
+# chromium, chrome, vscode, git, notepad++ || notepadqq, docker, tilda, zsh, oh-my-zsh,
+# nvidia drivers, steam
+
 
 ######################## Pre-REQ #############################
 sudo apt update
@@ -13,7 +18,7 @@ sudo apt install -y xclip
 sudo apt install -y snap
 
 # wget#
-sudo apt install gdebi-core wget
+sudo apt install -y gdebi-core wget
 
 # Vim #
 sudo apt install -y vim
@@ -78,29 +83,48 @@ sudo apt install -y code
 sudo apt install -y git
 
 # Notepad++ #
-snap install notepad-plus-plus
+snap install -y notepad-plus-plus
 
 # notepadqq #
-sudo snap install notepadqq
+#sudo snap install -y notepadqq
 
 # Docker #
-sudo apt install -y docker
+sudo apt install -y docker.io
 
 # Tilda #
 sudo apt install -y tilda
 
+###################### zsh & oh-my-zsh ##########################
+
+# zsh #
+sudo apt install -y zsh
+
+# oh-my-zsh #
+sudo apt install -y powerline fonts-powerline
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+##### Instructions after install ###
+# oh-my-zsh doc: https://github.com/robbyrussell/oh-my-zsh
+# vi ~/.zshrc
+# set ZSH_THEME="agnoster"
+
+
 ###################### Nvidia / AMD Driver ######################
 
-var=$(lspci -nn | perl -lne 'print if /^\d+\:.+(\[\S+\:\S+\])/' | grep NVIDIA)
 
-case "$var" in
- *NVIDIA*)
  sudo add-apt-repository ppa:graphics-drivers/ppa \
  sudo apt update
  sudo ubuntu-drivers autoinstall
  echo 'Current NVIDIA ONLY Installed'
- ;;
-esac
+
+########################### Steam ###############################
+
+sudo add-apt-repository multiverse
+sudo apt install -y steam
+
+#################### Kernel UI Installer ########################
+
+sudo add-apt-repository ppa:teejee2008/ppa 
+sudo apt-get install -y ukuu
 
 #################### Complete Statement #########################
 
