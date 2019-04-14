@@ -148,8 +148,13 @@ wget https://github.com/chrisknepper/android-messages-desktop/releases/download/
 sudo dpkg -i android-messages-desktop_1.0.0_amd64.deb
 echo 'Andriod Messaging Installed'
 
+# Discord #
 sudo snap install -y discord
 echo 'Discord Installed'
+
+# Slack #
+sudo snap install -y slack --classic
+echo 'Slack Installed'
 
 
 ###################### zsh & oh-my-zsh ##########################
