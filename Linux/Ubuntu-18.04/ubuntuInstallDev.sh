@@ -53,22 +53,26 @@ echo 'Gnome shell extentions installed'
 
 ################### VirtManager (KVM) ########################
 
-# Checks if yoru cpu can use hypervisor & returns only 1 'svm'
-isHyper=$(grep -o -m 1 'vmx\|svm' /proc/cpuinfo | head -1)
+# TODO: UPDATE THIS #
+# this installer is not working correctly for windows10 instance 
 
-if [ $isHyper = 'svm' ]; then
-  sudo apt install -y qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
-  # Add user to KVM Groups
-  sudo adduser $USER libvirt
-  sudo adduser $USER libvirt-quemu
-  echo '###########################'
-  echo 'Installation of virt-manager complete!'
-  echo '###########################'
-else
-  echo '###########################'
-  echo 'Cannot install virt-manager'
-  echo '###########################'
-fi
+
+# Checks if yoru cpu can use hypervisor & returns only 1 'svm'
+# isHyper=$(grep -o -m 1 'vmx\|svm' /proc/cpuinfo | head -1)
+
+# if [ $isHyper = 'svm' ]; then
+#   sudo apt install -y qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
+#   # Add user to KVM Groups
+#   sudo adduser $USER libvirt
+#   sudo adduser $USER libvirt-quemu
+#   echo '###########################'
+#   echo 'Installation of virt-manager complete!'
+#   echo '###########################'
+# else
+#   echo '###########################'
+#   echo 'Cannot install virt-manager'
+#   echo '###########################'
+# fi
 
 #################### Typical Browers #########################
 
