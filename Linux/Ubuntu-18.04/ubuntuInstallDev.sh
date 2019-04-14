@@ -12,6 +12,12 @@ sudo apt update
 sudo apt upgrade -y
 echo 'Update and Upgrade complete'
 
+# Create install folder
+cd ~/ \
+mkdir installs \
+cd installs \
+echo 'Created installer folder'
+
 # x-clip #
 # i use this as a terminal clipboard tool'
 sudo apt install -y xclip
@@ -81,21 +87,29 @@ sudo apt install -y chromium-browser
 echo 'Chromium Installed'
 
 # Chrome #
-cd Downloads
+cd ~/installs \
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 echo 'Chrome-brower Installed'
+
+
+cd ~/installs \
+wget https://installers.privateinternetaccess.com/download/pia-linux-1.1.1-02545.run \
+sh pia-linux-1.1.1-02545.run \
+echo 'Private Internet Access Installed'
 
 ####################### Dev Tools ############################
 
 # VSCode #
 sudo apt install -y software-properties-common apt-transport-https wget
+cd ~/installs \
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt install -y code
 echo 'VSCode Installed'
 
 # Dotnet Core v2.2 #
+cd ~/installs \
 wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo add-apt-repository universe \
@@ -129,7 +143,7 @@ echo 'Andriod Tilda Terminal Installed'
 # Android Messaging #
 # Doc Reference
 # https://github.com/chrisknepper/android-messages-desktop
-
+cd ~/installs \
 wget https://github.com/chrisknepper/android-messages-desktop/releases/download/v1.0.0/android-messages-desktop_1.0.0_amd64.deb \
 sudo dpkg -i android-messages-desktop_1.0.0_amd64.deb
 echo 'Andriod Messaging Installed'
@@ -184,12 +198,14 @@ read -p "Enter your git user.email" userEmail
 git config --global user.email $userEmail \
 
 # Setup SSH Key #
+cd ~/ \
 ssh-keygen \
 echo 'Created SSH-Key'
 
 # Create repos && workRepos Folder #
-mkdir ~/repos \
-mkdir ~/workRepos \
+cd ~/ \
+mkdir repos \
+mkdir workRepos \
 echo 'Created repo folders'
 
 # Clone os_install #
