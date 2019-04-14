@@ -130,6 +130,9 @@ wget https://github.com/chrisknepper/android-messages-desktop/releases/download/
 sudo dpkg -i android-messages-desktop_1.0.0_amd64.deb
 echo 'Andriod Messaging Installed'
 
+sudo snap install -y discord
+echo 'Discord Installed'
+
 
 ###################### zsh & oh-my-zsh ##########################
 
@@ -176,8 +179,19 @@ git config --global user.name $userName \
 read -p "Enter your git user.email" userEmail
 git config --global user.email $userEmail \
 
-# Setup SSH Key
+# Setup SSH Key #
 ssh-keygen \
+echo 'Created SSH-Key'
+
+# Create repos && workRepos Folder #
+mkdir ~/repos \
+mkdir ~/workRepos \
+echo 'Created repo folders'
+
+# Clone os_install #
+cd ~/repos \
+git clone https://github.com/CtrlNull/os_install_scripts.git \
+echo 'Created copy of os install in ~/repos'
 
 #################### Complete Statement #########################
 
