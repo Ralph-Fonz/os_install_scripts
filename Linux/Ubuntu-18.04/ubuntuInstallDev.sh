@@ -124,7 +124,7 @@ sudo apt install -y git
 echo 'Git Installed'
 
 # Notepad++ #
-snap install -y notepad-plus-plus
+sudo snap install notepad-plus-plus
 echo 'Notepad++ Installed'
 
 # notepadqq #
@@ -138,6 +138,12 @@ echo 'Docker CLI Installed'
 sudo apt install -y tilda
 echo 'Andriod Tilda Terminal Installed'
 
+######################  Design Editors ###########################
+
+# Gimp #
+sudo snap install gimp
+echo 'Gimp Installed'
+
 ####################### Communication ############################
 
 # Android Messaging #
@@ -149,11 +155,11 @@ sudo dpkg -i android-messages-desktop_1.0.0_amd64.deb
 echo 'Andriod Messaging Installed'
 
 # Discord #
-sudo snap install -y discord
+sudo snap install discord
 echo 'Discord Installed'
 
 # Slack #
-sudo snap install -y slack --classic
+sudo snap install slack --classic
 echo 'Slack Installed'
 
 
