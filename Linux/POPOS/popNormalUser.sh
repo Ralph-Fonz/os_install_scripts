@@ -54,29 +54,6 @@ echo 'Gnome Tweak tool Installed'
 sudo apt install -y gnome-shell-extensions
 echo 'Gnome shell extentions installed'
 
-################### VirtManager (KVM) ########################
-
-# TODO: UPDATE THIS #
-# this installer is not working correctly for windows10 instance 
-
-
-# Checks if yoru cpu can use hypervisor & returns only 1 'svm'
-# isHyper=$(grep -o -m 1 'vmx\|svm' /proc/cpuinfo | head -1)
-
-# if [ $isHyper = 'svm' ]; then
-#   sudo apt install -y qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
-#   # Add user to KVM Groups
-#   sudo adduser $USER libvirt
-#   sudo adduser $USER libvirt-quemu
-#   echo '###########################'
-#   echo 'Installation of virt-manager complete!'
-#   echo '###########################'
-# else
-#   echo '###########################'
-#   echo 'Cannot install virt-manager'
-#   echo '###########################'
-# fi
-
 #################### Typical Browers #########################
 
 # Chromium #
@@ -94,42 +71,6 @@ cd ~/installs \
 wget https://installers.privateinternetaccess.com/download/pia-linux-1.1.1-02545.run \
 sh pia-linux-1.1.1-02545.run \
 echo 'Private Internet Access Installed'
-
-####################### Dev Tools ############################
-
-# VSCode #
-sudo apt install -y software-properties-common apt-transport-https wget
-cd ~/installs \
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-sudo apt install -y code
-echo 'VSCode Installed'
-
-# Dotnet Core v2.2 #
-cd ~/installs \
-wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-sudo add-apt-repository universe \
-echo 'Universe Repo Added'
-sudo apt-get install -y apt-transport-https
-sudo apt-get update
-sudo apt-get install -y dotnet-sdk-2.2
-echo 'DotNet Core 2.2 Installed'
-
-# Git #
-sudo apt install -y git
-echo 'Git Installed'
-
-# Notepad++ #
-sudo snap install notepad-plus-plus
-echo 'Notepad++ Installed'
-
-# notepadqq #
-#sudo snap install -y notepadqq
-
-# Docker #
-sudo apt install -y docker.io
-echo 'Docker CLI Installed'
 
 # Tilda #
 sudo apt install -y tilda
@@ -151,15 +92,6 @@ wget https://github.com/chrisknepper/android-messages-desktop/releases/download/
 sudo dpkg -i android-messages-desktop_1.0.0_amd64.deb
 echo 'Andriod Messaging Installed'
 
-# Discord #
-sudo snap install discord
-echo 'Discord Installed'
-
-# Slack #
-sudo snap install slack --classic
-echo 'Slack Installed'
-
-
 ###################### zsh & oh-my-zsh ##########################
 
 # zsh #
@@ -175,43 +107,9 @@ echo 'Oh-My-Zsh Installed'
 # vi ~/.zshrc
 # set ZSH_THEME="agnoster"
 
+####################### Snap Installs ###########################
 
-########################### Steam ###############################
-
-sudo add-apt-repository multiverse
-echo 'Multiverse added'
-sudo apt install -y steam
-echo 'Steam Installed'
-
-#################### Kernel UI Installer ########################
-
-#sudo add-apt-repository ppa:teejee2008/ppa 
-#sudo apt-get install -y ukuu
-#echo 'Kernel Updater Installed'
-
-#################### Git and ssh-key setup #######################
-
-# Setup Git global args #
-read -p "Enter your git user.name" userName
-git config --global user.name $userName \
-read -p "Enter your git user.email" userEmail
-git config --global user.email $userEmail \
-
-# Setup SSH Key #
-cd ~/ \
-ssh-keygen \
-echo 'Created SSH-Key'
-
-# Create repos && workRepos Folder #
-cd ~/ \
-mkdir repos \
-mkdir workRepos \
-echo 'Created repo folders'
-
-# Clone os_install #
-cd ~/repos \
-git clone https://github.com/CtrlNull/os_install_scripts.git \
-echo 'Created copy of os install in ~/repos'
+snap install onlyoffice-desktopeditors
 
 #################### Complete Statement #########################
 
