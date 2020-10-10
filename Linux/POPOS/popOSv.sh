@@ -2,7 +2,9 @@
 
 # Updated [Thursday May 9th 2019] for version >>> 
 
-
+declare -a apt=(
+    "xclip", "Snap", "gdebi-core wget", "vim", "chromium-browser", ""
+)
 
 ######################## Pre-REQ #############################
 sudo apt update
@@ -15,67 +17,8 @@ mkdir installs \
 cd installs \
 echo 'Created installer folder'
 
-# x-clip #
-# i use this as a terminal clipboard tool'
-sudo apt install -y xclip
-echo 'XClip Installed'
-
-# snap #
-sudo apt install -y snap
-echo 'Snap Installed'
-
-# wget#
-sudo apt install -y gdebi-core wget
-echo 'wget Installed'
-
-# Vim #
-sudo apt install -y vim
-echo 'Vim Installed'
-
-################# FOR CUSTOMIZING GNOME ######################
-
-# Papirus Icon Theme #
-# https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
-sudo add-apt-repository ppa:papirus/papirus \
-sudo apt-get update
-sudo apt-get install -y papirus-icon-theme
-echo 'Papirus Installed'
-
-# Arc Gtk Theme #
-# https://github.com/horst3180/arc-theme
-sudo apt install -y arc-theme
-echo 'arc-theme Installed'
-
-# Gnome Tweak tool #
-sudo apt install -y gnome-tweak-tool
-echo 'Gnome Tweak tool Installed'
-
-# Gnome Shell Extentions #
-sudo apt install -y gnome-shell-extensions
-echo 'Gnome shell extentions installed'
-
-################### VirtManager (KVM) ########################
-
-# TODO: UPDATE THIS #
-# this installer is not working correctly for windows10 instance 
 
 
-# Checks if yoru cpu can use hypervisor & returns only 1 'svm'
-# isHyper=$(grep -o -m 1 'vmx\|svm' /proc/cpuinfo | head -1)
-
-# if [ $isHyper = 'svm' ]; then
-#   sudo apt install -y qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils libguestfs-tools genisoimage virtinst libosinfo-bin virt-manager
-#   # Add user to KVM Groups
-#   sudo adduser $USER libvirt
-#   sudo adduser $USER libvirt-quemu
-#   echo '###########################'
-#   echo 'Installation of virt-manager complete!'
-#   echo '###########################'
-# else
-#   echo '###########################'
-#   echo 'Cannot install virt-manager'
-#   echo '###########################'
-# fi
 
 #################### Typical Browers #########################
 
