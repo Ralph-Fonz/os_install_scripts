@@ -32,7 +32,6 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 echo 'Chrome-brower Installed'
 
-
 cd ~/installs \
 wget https://installers.privateinternetaccess.com/download/pia-linux-1.1.1-02545.run \
 sh pia-linux-1.1.1-02545.run \
