@@ -11,7 +11,7 @@ declare -a programs=(
 )
 
 # PASSWORD PROMPT
-read -s -p 'Enter Password: ' mypass
+# read -s -p 'Enter Password: ' mypass
 
 printf '\n'
 # Update #
@@ -30,15 +30,14 @@ done
 #AUR
 
 declare -a pamac=(
-	"amazon-workspaces-bin"
+	"amazon-workspaces-bin"--
 	"slack-desktop"
 	"spotify-legacy"
 )
 
 for i in "${pamac[@]}"; do
 	printf 'Installing ' "$m"
-	no | pamac build "$i" --no-confirm
-	$mypass \
+	pamac build "$i" --no-confirm $mypass
 	printf '\n'
 done
 
