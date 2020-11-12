@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+### Developer: Ralph_Fonz
+### Date published: Thurs Nov 12
+### Description: Personal Install Script for after fresh install
+
 declare -a programs=(
 	"code"
 	"Chromium"
@@ -100,7 +104,7 @@ done
 
 # AMD GPU check
 
-PS3='AMD or NVIDIA?  '
+PS3='AMD or NVIDIA? '
 options=("AMD" "NVIDIA" "Quit")
 select opt in "${options[@]}"; do
 	case $opt in
@@ -117,7 +121,6 @@ select opt in "${options[@]}"; do
 	*) echo "invalid option $REPLY" ;;
 	esac
 done
-
 
 #################### Complete Statement #########################
 
