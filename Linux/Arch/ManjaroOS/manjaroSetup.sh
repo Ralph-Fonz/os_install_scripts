@@ -8,6 +8,7 @@ declare -a programs=(
 	"tilda"
 	"tilda"
 	"remmina"
+	"powerline-fonts"
 )
 
 # PASSWORD PROMPT
@@ -27,12 +28,28 @@ for i in "${programs[@]}"; do
 	printf '\n'
 done
 
+# Oh my zsh
+# https://ohmyz.sh/
+$ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo 'Dont forget to change your theme!'
+printf '\n'
+
+echo 'Downloading Private Internet Access VPN'
+wget 'https://installers.privateinternetaccess.com/download/pia-linux-2.5.1-05676.run'
+sh pia-linux-*.run
+printf '\n'
+
 #AUR
 
 declare -a pamac=(
-	"amazon-workspaces-bin"--
+	"amazon-workspaces-bin"
 	"slack-desktop"
 	"spotify-legacy"
+	"insomnia-bin"
+	"android-messages-desktop"
+	"postman-bin"
+	"google-chrome"
 )
 
 for i in "${pamac[@]}"; do
@@ -70,7 +87,7 @@ select opt in "${options[@]}"; do
 		printf '\n'
 		# KVM/Qemu #
 		# Setup Service #
-		sudo systemctl enable libvirtd.service
+		sudo systemctl enable libvirtd.servizce
 		sudo systemctl start libvirtd.service
 		printf '\n'
 		;;
