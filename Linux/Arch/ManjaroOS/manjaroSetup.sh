@@ -13,6 +13,7 @@ declare -a programs=(
 	"tilda"
 	"remmina"
 	"powerline-fonts"
+	"docker"
 )
 
 # PASSWORD PROMPT
@@ -45,7 +46,6 @@ sh pia-linux-*.run
 printf '\n'
 
 #AUR
-
 declare -a pamac=(
 	"amazon-workspaces-bin"
 	"slack-desktop"
