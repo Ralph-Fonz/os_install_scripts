@@ -10,7 +10,6 @@ declare -a programs=(
 	"chrome-gnome-extension"
 	"Git"
 	"tilda"
-	"tilda"
 	"remmina"
 	"powerline-fonts"
 	"docker"
