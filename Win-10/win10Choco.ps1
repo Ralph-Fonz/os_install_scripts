@@ -61,8 +61,10 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
   cinst -y slack
   cinst -y discord
   cinst -y insomnia-rest-api-client
+  cinst -y postman
   cinst -y nodejs.install
   cinst -y git.install
+  cinst -y amazon-workspaces
 $reply = Read-Host -Prompt "Is this for backend?[y/n]"
   if ( $reply -match "[yY]" ) { 
     cinst -y sql-server-management-studio
@@ -75,4 +77,6 @@ $reply = Read-Host -Prompt "Is this for backend?[y/n]"
 mkdir ~/Repos
 mkdir ~/WorkRepos
 mkdir ~/Installs
+
+############ SETUP my
 
