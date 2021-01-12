@@ -21,8 +21,7 @@ downloadPacman() {
 downloadAur() {
 for i in "$i"; do
 	printf 'Installing ' "$i"
-	pamac build "$i" --no-confirm
-echo -ne '\n' | "$pass"
+	echo -ne $pass | pamac build "$i" --no-confirm
 	printf '\n'
 done
 }
@@ -34,10 +33,8 @@ done
 
 
 ## ========== +++++ [[ Updating ]] ++++ ============ ##
-
 echo 'Updating'
-yes | sudo pacman -Syyu
-echo -ne '\n' | "$pass"
+echo -ne $pass | sudo pacman -Syu
 printf '\n'
 
 ## ========== +++++ [[ Generic Programs Needed ]] ++++ ============ ##
