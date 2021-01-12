@@ -44,13 +44,10 @@ declare -a programs=(
 	"tilda"
 	"remmina"
 	"powerline-fonts"
+	"gimp"
 )
 
-for i in "${programs[@]}"; do
-	echo 'Installing ' "$i"
-	yes | sudo pacman -S "$i"
-	printf '\n'
-done
+downloadPacman $programs
 
 # Oh my zsh
 # https://ohmyz.sh/
@@ -67,7 +64,7 @@ declare -a pamac=(
 	"google-chrome"
 )
 
-downloadAur "$pamac"
+downloadAur $pamac
 
 ## ========== +++++ [[ VPN | Private Internet Access ]] ++++ ============ ##
 
@@ -101,9 +98,9 @@ read -p "Are you a Developer?" choice
 case $choice in
  y|Y ) 
 ## Install Pacmac DevTools
- downloadPacman "$developerPacman"
+ downloadPacman $developerPacman
  ## Install AUR Dev Tools
-downloadAur "$developerAUR"
+downloadAur $developerAUR
  ;;
  n|N ) 
  break
@@ -129,8 +126,7 @@ declare -a virtualization=(
 read -p "Will this be used for VMs?" choice
 case $choice in
  y|Y )
-downloadPacman "$virtualization"
-
+downloadPacman $virtualization
 # KVM/Qemu #
 # Setup Service #
 sudo systemctl enable libvirtd.servizce
