@@ -4,28 +4,51 @@
 ### Date published: Thurs Nov 12
 ### Description: Personal Install Script for after fresh install
 
-declare -a programs=(
-	"code"
-	"Chromium"
-	"chrome-gnome-extension"
-	"Git"
-	"tilda"
-	"remmina"
-	"powerline-fonts"
-	"docker"
-)
+
+## ========== +++++ [[ Variables ]] ++++ ============ ##
+read -r -p 'Password: ' pass
+
+## ========== +++++ [[ Functions ]] ++++ ============ ##
+
+downloadPacman() {
+		for i in "$1"; do
+			printf 'Installing ' "$i"
+			yes | sudo pacman -S "$i"
+		done
+		printf '\n'
+}
+
+downloadAur() {
+for i in "$i"; do
+	printf 'Installing ' "$i"
+	pamac build "$i" --no-confirm
+echo -ne '\n' | "$pass"
+	printf '\n'
+done
+}
+
 
 # PASSWORD PROMPT
 # read -s -p 'Enter Password: ' mypass
 
-printf '\n'
-# Update #
+
+
+## ========== +++++ [[ Updating ]] ++++ ============ ##
+
 echo 'Updating'
 yes | sudo pacman -Syyu
-$mypass
+echo -ne '\n' | "$pass"
 printf '\n'
 
-# Loop over array above and install programs from pacman
+## ========== +++++ [[ Generic Programs Needed ]] ++++ ============ ##
+declare -a programs=(
+	"Chromium"
+	"chrome-gnome-extension"
+	"tilda"
+	"remmina"
+	"powerline-fonts"
+)
+
 for i in "${programs[@]}"; do
 	echo 'Installing ' "$i"
 	yes | sudo pacman -S "$i"
@@ -39,103 +62,126 @@ $ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/instal
 echo 'Dont forget to change your theme!'
 printf '\n'
 
+## ========== +++++ [[ AUR Programs ]] ++++ ============ ##
+declare -a pamac=(
+	"slack-desktop"
+	"spotify-legacy"
+	"android-messages-desktop"
+	"google-chrome"
+)
+
+downloadAur "$pamac"
+
+## ========== +++++ [[ VPN | Private Internet Access ]] ++++ ============ ##
+
+read -p "Do you own Private Internet Access?" choice
+case $choice in
+ y|Y ) 
 echo 'Downloading Private Internet Access VPN'
 wget 'https://installers.privateinternetaccess.com/download/pia-linux-2.5.1-05676.run'
 sh pia-linux-*.run
 printf '\n'
+ ;;
+ n|N ) echo "no";;
+ *) echo "invalid";;
+ esac
 
-#AUR
-declare -a pamac=(
-	"amazon-workspaces-bin"
-	"slack-desktop"
-	"spotify-legacy"
-	"insomnia-bin"
-	"android-messages-desktop"
-	"postman-bin"
-	"google-chrome"
+## ========== +++++ [[ Developer Programs ]] ++++ ============ ##
+
+declare -a developerPacman=(
+	"docker"
+	"code"
+	"Git"
 )
 
-for i in "${pamac[@]}"; do
-	printf 'Installing ' "$m"
-	pamac build "$i" --no-confirm $mypass
-	printf '\n'
-done
+declare -a developerAUR=(
+	"amazon-workspaces-bin"
+	"insomnia-bin"
+	"postman-bin"
+)
 
-# Desktop Laptop Specific installs
+read -p "Are you a Developer?" choice
+case $choice in
+ y|Y ) 
+## Install Pacmac DevTools
+ downloadPacman "$developerPacman"
+ ## Install AUR Dev Tools
+downloadAur "$developerAUR"
+ ;;
+ n|N ) 
+ break
+ ;;
+ *) echo "invalid";;
+ esac
 
-PS3='Is this a Laptop or desktop? '
-options=("laptop" "desktop" "Quit")
-select opt in "${options[@]}"; do
-	case $opt in
-	"laptop") 
-	echo "Nothing to do"
-	printf '\n'
-	;;
-	"desktop")
-		declare -a virtualization=(
-			"virtual-manager"
-			"virt-viewer"
-			"qemu"
-			"vde2"
-			"ebtables"
-			"dnsmasq"
-			"bridge-utils"
-			"openbsd-netcat"
-		)
 
-		for i in "${virtualization[@]}"; do
-			printf 'Installing ' "$m"
-			yes | sudo pacman -S "$i"
-		done
-		printf '\n'
-		# KVM/Qemu #
-		# Setup Service #
-		sudo systemctl enable libvirtd.servizce
-		sudo systemctl start libvirtd.service
-		printf '\n'
-		;;
-	"Quit")
-		break
-		;;
-	*) echo "invalid option $REPLY" ;;
-	esac
-done
+## ========== +++++ [[ Virtualization Programs ]] ++++ ============ ##
 
-# AMD GPU check
+declare -a virtualization=(
+	"virtual-manager"
+	"virt-viewer"
+	"qemu"
+	"vde2"
+	"ebtables"
+	"dnsmasq"
+	"bridge-utils"
+	"openbsd-netcat"
+)
 
-PS3='AMD or NVIDIA? '
-options=("AMD" "NVIDIA" "Quit")
-select opt in "${options[@]}"; do
-	case $opt in
-	"AMD")
-		yes | sudo pacman -S mesa
-		printf '\n'
-		;;
-	"NVIDIA") ;;
-		echo "Nothing to do"
-		printf '\n'
-		"Quit")
-		break
-		;;
-	*) echo "invalid option $REPLY" ;;
-	esac
-done
 
-#################### Complete Statement #########################
+read -p "Will this be used for VMs?" choice
+case $choice in
+ y|Y )
+downloadPacman "$virtualization"
 
-PS3='Installation complete, RESTART REQUIRED '
-options=("Restart" "Power-Off" "Quit")
-select opt in "${options[@]}"; do
-	case $opt in
-	"Restart")
-		sudo reboot
-		;;
-	"Power-Off")
-		sudo poweroff
-		;;
-	"Quit")
-		break
-		;;
-	*) echo "invalid option $REPLY" ;;
-	esac
-done
+# KVM/Qemu #
+# Setup Service #
+sudo systemctl enable libvirtd.servizce
+sudo systemctl start libvirtd.service
+ ;;
+ n|N ) 
+ break;;
+ *) echo "invalid";;
+ esac
+
+## ========== +++++ [[ GPU INSTALL ]] ++++ ============ ##
+
+# AMD
+read -p "AMD gpu installed?" choice
+case $choice in
+ y|Y ) 
+yes | sudo pacman -S mesa
+printf '\n'
+ ;;
+ n|N )
+ break;;
+ *) echo "invalid";;
+ esac
+
+# NVIDIA
+read -p "AMD gpu installed?" choice
+case $choice in
+ y|Y ) 
+echo "Nothing created yet"
+printf '\n'
+ ;;
+ n|N )
+ break;;
+ *) echo "invalid";;
+ esac
+
+
+## ========== +++++ [[ REBOOT ]] ++++ ============ ##
+echo "Installation complete, RESTART REQUIRED"
+printf "\n"
+
+read -p "Restart now?" choice
+case $choice in
+ y|Y ) 
+sudo reboot
+ ;;
+ n|N )
+ break;;
+ *) echo "invalid";;
+ esac
+
