@@ -1,6 +1,5 @@
-#!/usr/bin/bash
 
-### Developer: Ralph_Fonz
+
 ### Date published: Thurs Nov 12
 ### Description: Personal Install Script for after fresh install
 
@@ -10,27 +9,9 @@ read -r -p 'Password: ' pass
 
 ## ========== +++++ [[ Functions ]] ++++ ============ ##
 
-downloadPacman() {
-		for i in "$1"; do
-			printf 'Installing ' "$i"
-			yes | sudo pacman -S "$i"
-		done
-		printf '\n'
-}
-
-downloadAur() {
-for i in "$i"; do
-	printf 'Installing ' "$i"
-	echo -ne $pass | pamac build "$i" --no-confirm
-	printf '\n'
-done
-}
-
 
 # PASSWORD PROMPT
 # read -s -p 'Enter Password: ' mypass
-
-
 
 ## ========== +++++ [[ Updating ]] ++++ ============ ##
 echo 'Updating'
@@ -38,22 +19,31 @@ echo -ne $pass | sudo pacman -Syu
 printf '\n'
 
 ## ========== +++++ [[ Generic Programs Needed ]] ++++ ============ ##
+echo 'Installing Normy Programs'
+printf '\n'
+
 declare -a programs=(
-	"Chromium"
-	"chrome-gnome-extension"
+	"chrome-gnome-shell"
 	"tilda"
 	"remmina"
 	"powerline-fonts"
 	"gimp"
+	"brave"
+	"vim"
 )
 
-downloadPacman $programs
+for i in "${programs[@]}"
+do
+	echo 'Installing ' 
+	echo "$i"
+	printf '\n'
+	yes | sudo pacman -S "$i"
+done
+printf '\n'
 
 # Oh my zsh
 # https://ohmyz.sh/
-$ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-echo 'Dont forget to change your theme!'
 printf '\n'
 
 ## ========== +++++ [[ AUR Programs ]] ++++ ============ ##
@@ -64,7 +54,14 @@ declare -a pamac=(
 	"google-chrome"
 )
 
-downloadAur $pamac
+for i in "${pamac[@]}"
+do
+	echo 'Installing ' 
+	echo "$i"
+	printf '\n'
+	echo -ne $pass | pamac build "$i" --no-confirm
+	printf '\n'
+done
 
 ## ========== +++++ [[ VPN | Private Internet Access ]] ++++ ============ ##
 
@@ -98,9 +95,24 @@ read -p "Are you a Developer?" choice
 case $choice in
  y|Y ) 
 ## Install Pacmac DevTools
- downloadPacman $developerPacman
+for i in "${developerPacman[@]}"
+do
+	echo 'Installing ' 
+	echo "$i"
+	printf '\n'
+	yes | sudo pacman -S "$i"
+done
+printf '\n'
+
  ## Install AUR Dev Tools
-downloadAur $developerAUR
+for i in "${developerAUR[@]}"
+do
+	echo 'Installing ' 
+	echo "$i"
+	printf '\n'
+	echo -ne $pass | pamac build "$i" --no-confirm
+	printf '\n'
+done
  ;;
  n|N ) 
  break
@@ -112,7 +124,7 @@ downloadAur $developerAUR
 ## ========== +++++ [[ Virtualization Programs ]] ++++ ============ ##
 
 declare -a virtualization=(
-	"virtual-manager"
+	"virt-manager"
 	"virt-viewer"
 	"qemu"
 	"vde2"
@@ -126,7 +138,14 @@ declare -a virtualization=(
 read -p "Will this be used for VMs?" choice
 case $choice in
  y|Y )
-downloadPacman $virtualization
+for i in "${virtualization[@]}"
+do
+	echo 'Installing ' 
+	echo "$i"
+	printf '\n'
+	yes | sudo pacman -S "$i"
+done
+printf '\n'
 # KVM/Qemu #
 # Setup Service #
 sudo systemctl enable libvirtd.servizce
@@ -152,7 +171,7 @@ printf '\n'
  esac
 
 # NVIDIA
-read -p "AMD gpu installed?" choice
+read -p "Nvidia gpu installed?" choice
 case $choice in
  y|Y ) 
 echo "Nothing created yet"
@@ -163,6 +182,46 @@ printf '\n'
  *) echo "invalid";;
  esac
 
+# Gaming
+read -p "IIs this a gaming machine?" choice
+case $choice in
+ y|Y ) 
+declare -a gamingPacman=(
+	"steam"
+	"discord"
+)
+
+for i in "${gamingPacman[@]}"
+do
+	echo 'Installing ' 
+	echo "$i"
+	printf '\n'
+	yes | sudo pacman -S "$i"
+done
+
+declare -a gamingAur=(
+	"shadow-tech"
+)
+
+for i in "${gamingAur[@]}"
+do
+	echo 'Installing ' 
+	echo "$i"
+	printf '\n'
+	echo -ne $pass | pamac build "$i" --no-confirm
+	printf '\n'
+done
+
+printf '\n'
+ ;;
+ n|N )
+ break;;
+ *) echo "invalid";;
+ esac
+
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo 'Dont forget to change your theme!'
+printf '\n'
 
 ## ========== +++++ [[ REBOOT ]] ++++ ============ ##
 echo "Installation complete, RESTART REQUIRED"
