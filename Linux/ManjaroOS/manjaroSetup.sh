@@ -71,11 +71,18 @@ case $choice in
 echo 'Downloading Private Internet Access VPN'
 wget 'https://installers.privateinternetaccess.com/download/pia-linux-2.5.1-05676.run'
 sh pia-linux-*.run
+
+echo 'PIA installed'
+
+rm pia-linux-*.run
+
 printf '\n'
  ;;
  n|N ) echo "no";;
  *) echo "invalid";;
  esac
+
+
 
 ## ========== +++++ [[ Developer Programs ]] ++++ ============ ##
 
