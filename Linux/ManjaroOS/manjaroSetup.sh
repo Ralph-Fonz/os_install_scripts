@@ -5,7 +5,6 @@
 
 
 ## ========== +++++ [[ Variables ]] ++++ ============ ##
-read -r -p 'Password: ' pass
 
 ## ========== +++++ [[ Functions ]] ++++ ============ ##
 
@@ -96,6 +95,7 @@ declare -a developerAUR=(
 	"amazon-workspaces-bin"
 	"insomnia-bin"
 	"postman-bin"
+	"azuredatastudio-bin"
 )
 
 read -p "Are you a Developer?" choice
@@ -177,6 +177,25 @@ printf '\n'
  *) echo "invalid";;
  esac
 
+##### ((EGPU)) ######
+ read -p "Epu Installed?" choice
+case $choice in
+ y|Y ) 
+yes | sudo pacman -S gksu
+mkdir ~/Repos
+cd ~/Repos
+git clone https://github.com/Ralph-Fonz/eGPU_Switcher.git
+cd eGPU_Switcher
+chmod +x egpu-switcher.sh
+sudo cp eGpuSwitcher.desktop ~/.local/share/applications/
+cd ~/
+printf '\n'
+ ;;
+ n|N )
+ break;;
+ *) echo "invalid";;
+ esac
+
 # NVIDIA
 read -p "Nvidia gpu installed?" choice
 case $choice in
@@ -189,7 +208,7 @@ printf '\n'
  *) echo "invalid";;
  esac
 
-# Gaming
+##### (((Gaming))) ####
 read -p "IIs this a gaming machine?" choice
 case $choice in
  y|Y ) 
@@ -207,7 +226,7 @@ do
 done
 
 declare -a gamingAur=(
-	"shadow-tech"
+	"shadow-beta"
 )
 
 for i in "${gamingAur[@]}"
