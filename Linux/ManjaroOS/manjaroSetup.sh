@@ -178,7 +178,7 @@ printf '\n'
  esac
 
 ##### ((EGPU)) ######
- read -p "Epu Installed?" choice
+ read -p "Epu Installed and this is Gnome?" choice
 case $choice in
  y|Y ) 
 yes | sudo pacman -S gksu
